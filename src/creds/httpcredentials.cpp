@@ -102,7 +102,7 @@ HttpCredentials::HttpCredentials()
       _password(),
       _ready(false),
       _fetchJobInProgress(false),
-      _readPwdFromDepricatedPlace(false)
+      _readPwdFromDeprecatedPlace(false)
 {
 }
 
@@ -231,7 +231,7 @@ void HttpCredentials::fetch(Account *account)
         job->setProperty("account", QVariant::fromValue(account));
         job->start();
         _fetchJobInProgress = true;
-        _readPwdFromDepricatedPlace = true;
+        _readPwdFromDeprecatedPlace = true;
     }
 }
 bool HttpCredentials::stillValid(QNetworkReply *reply)
@@ -265,7 +265,7 @@ void HttpCredentials::slotReadJobDone(QKeychain::Job *job)
     } else {
 
         if( _password.isEmpty() || error == EntryNotFound ) {
-            if( _readPwdFromDepricatedPlace ) {
+            if( _readPwdFromDeprecatedPlace ) {
                 // there simply was not a password. Lets restart a read job without
                 // a settings object as we did it in older client releases.
                 ReadPasswordJob *job = new ReadPasswordJob(Theme::instance()->appName());
@@ -276,7 +276,7 @@ void HttpCredentials::slotReadJobDone(QKeychain::Job *job)
                 connect(job, SIGNAL(finished(QKeychain::Job*)), SLOT(slotReadJobDone(QKeychain::Job*)));
                 job->setProperty("account", QVariant::fromValue(account));
                 job->start();
-                _readPwdFromDepricatedPlace = false; // do  try that only once.
+                _readPwdFromDeprecatedPlace = false; // do  try that only once.
                 _fetchJobInProgress = true;
                 // Note: if this read job succeeds, the value from the old place is still
                 // NOT persisted into the new account.

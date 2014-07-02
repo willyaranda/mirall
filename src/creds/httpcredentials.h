@@ -63,7 +63,7 @@ private:
     QString _password;
     bool _ready;
     bool _fetchJobInProgress; //True if the keychain job is in progress or the input dialog visible
-    bool _readPwdFromDepricatedPlace;
+    bool _readPwdFromDeprecatedPlace;
 };
 
 } // ns Mirall
