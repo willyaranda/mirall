@@ -294,6 +294,8 @@ void HttpCredentials::slotReadJobDone(QKeychain::Job *job)
             }
         } else {
             qDebug() << "Error while reading password" << job->errorString();
+            _ready = false;
+            emit fetched();
         }
     }
 }
