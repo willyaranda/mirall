@@ -295,7 +295,6 @@ void HttpCredentials::slotReadJobDone(QKeychain::Job *job)
         } else {
             qDebug() << "Error while reading password" << job->errorString();
         }
-        // if we end here, the password is empty.
     }
 }
 
